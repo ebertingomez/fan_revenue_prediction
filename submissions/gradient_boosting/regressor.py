@@ -5,12 +5,11 @@ from sklearn.base import BaseEstimator
 class Regressor(BaseEstimator):
     def __init__(self):
         self.reg = lgb.LGBMRegressor(
+                    n_jobs=3,
+                    num_threads=3,
                     num_leaves=250,
                     learning_rate=0.05,
                     n_estimators=160,
-                    num_iterations=220,
-                    tree_learner = 'voting',
-                    min_sum_hessian_in_leaf = 1e-10,
                     )
 
     def fit(self, X, y):
