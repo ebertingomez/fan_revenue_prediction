@@ -13,6 +13,11 @@ class FeatureExtractor(object):
         pass
 
     def fit(self, X_df, y_array):
+        X_df = X_df[:10000]
+        y_array = y_array[:10000]
+        pass
+
+    def transform(self, X_df):
         path = os.path.dirname(__file__)
         award = pd.read_csv(os.path.join(path, 'award_notices_RAMP.csv.zip'),
                             compression='zip', low_memory=False)
@@ -71,9 +76,4 @@ class FeatureExtractor(object):
                 ('drop cols', 'drop', drop_cols),
                 ])
 
-        self.preprocessor = preprocessor
-        self.preprocessor.fit(X_df, y_array)
-        return self
-
-    def transform(self, X_df):
-        return self.preprocessor.transform(X_df)
+        return preprocessor.fit_transform(X_df)
